@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <curses.h>
-#include <ctype.h>
+#include <conio.h>
 
 int valida_variavel(char *chave){
 	int i = 0;
 
-	if(chave[i++] == '#'){
+	if(chave[i++] == '&'){
 		if(islower(chave[i++])){
 			while(isgraph(chave[i])){
 				if(!isalnum(chave[i++])){
@@ -20,7 +20,7 @@ int valida_variavel(char *chave){
 	return 0;
 }
 
-// Valida funÃ§Ãµes e mÃ©todos
+// Valida funções e métodos
 
 int valida_principal(char *chave){
 	return (strcmp("principal", chave) == 0) ? 1 : 0;
