@@ -1,0 +1,13 @@
+begin
+int #aa, #bB;
+char #nome;
+#aa:=1;
+#nome:="Teste";
+write("Digite seu nome e sua idade");
+read(#nome, #bB, #aa,#bB	);
+read(#bB);
+if(#bB>10)
+then write("Maior que 10");
+write(#nome);
+write(#bB);
+end
