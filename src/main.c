@@ -1,7 +1,7 @@
 // Compilador 2018-1
 // Disciplina: Compiladores Professora: Aline Dayany Lemos
-// Acadêmico: Breno Borges 	Matricula:	1410969
-// Acadêmico: Jean Flores	Matricula: 	1310159
+// Acadï¿½mico: Breno Borges 	Matricula:	1410969
+// Acadï¿½mico: Jean Flores	Matricula: 	1310159
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,12 +15,15 @@ int main(){
 	inicializa_struct();
 	lista_palavras_reservadas=cria();
 	insere_palavras_reservadas();
+	
 	string=(char*)malloc(10000);
-	tipo_temporario=(char*)malloc(10000);;
+	tipo_temporario=(char*)malloc(10000);
 	arquivo=(char*)malloc(10000);
 	variavel_temporaria=(char*)malloc(10000);
 	tipo_temporario=(char*)malloc(10000);
+	
 	copia_arquivo();
+	mensagem_inicial();
 	verifica();
 	imprime_variaveis_declaradas();
 }

@@ -44,9 +44,16 @@ void imprime_variaveis_declaradas();
 void insere_variaveis_declaradas();
 void pega_palavra_decimal();
 void inicializa_struct();
+void mensagem_inicial();
+
+void mensagem_inicial(){
+	printf("\n================================\n");
+	printf("=   	  Compilando...        =\n");
+	printf("================================\n\n");
+}
 
 void copia_arquivo(){
-	if((file=fopen("../public/linguagem_valida.txt","r"))==NULL){
+	if((file=fopen("../public/linguagem_valida.lang","r"))==NULL){
 		printf("Impossivel abrir o arquivo informado\n");
 		exit(0);
 	}
@@ -122,9 +129,11 @@ char* verifica(){
 				printf("ERRO DE SINTAXE\n");
 				exit(0);
 			}
-			printf("\n========================\n");
-			printf("=  LINGUAGEM VALIDA    =\n");
-			printf("========================\n");
+
+			printf("\n================================\n");
+			printf("=   	LINGUAGEM VALIDA       =\n");
+			printf("================================\n");
+
 			final=1;
 			return 0;
 		}
@@ -420,14 +429,16 @@ void pega_variavel(){
 }
 
 void imprime_variaveis_declaradas(){
-	system("pause");
-	system("cls");
 	int i;
+
+	printf("\n================================\n");
+	printf("=  INFORMACOES DAS VARIAVEIS   =\n");
+	printf("================================\n\n");
 	
 	for(i=0;i<contTable;i++){
-		printf("Tipo => %s\n",lista_variaveis_declaradas[i].tipo);
-		printf("Variavel => %s\n",lista_variaveis_declaradas[i].variavel);
-		printf("Valor => %s\n",lista_variaveis_declaradas[i].valor);
+		printf("	Tipo => %s\n",lista_variaveis_declaradas[i].tipo);
+		printf("	Variavel => %s\n",lista_variaveis_declaradas[i].variavel);
+		printf("	Valor => %s\n",lista_variaveis_declaradas[i].valor);
 		printf("\n");
 	}
 }
@@ -591,8 +602,6 @@ int verifica_se_entao(){
 	}
 	return 1;
 }
-
-//=====================================
 
 int verifica_palavras_reservadas(){
 	while(lista_palavras_reservadas!=NULL){
