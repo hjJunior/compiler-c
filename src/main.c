@@ -19,12 +19,8 @@ int main(){
 	arquivo=(char*)malloc(10000);
 	variavel_temporaria=(char*)malloc(10000);
 	tipo_temporario=(char*)malloc(10000);
-	
-	
 	copia_arquivo();
 	verifica();
-	
 	imprime_variaveis_declaradas();
-	
 }
 

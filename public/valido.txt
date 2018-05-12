@@ -3,7 +3,7 @@ int #aa, #bB;
 char #nome;
 #aa:=1;
 #nome:="Teste";
-write("Digite seu nome e sua idade");
+write("Digita ");
 read(#nome, #bB, #aa,#bB	);
 read(#bB);
 if(#bB>10)

@@ -4,10 +4,8 @@ struct variaveis{
 	char* valor;
 };
 
-
 typedef struct variaveis Variaveis;
 Variaveis lista_variaveis_declaradas[10000];
-
 char* string;
 char* arquivo;
 FILE* file;
@@ -20,6 +18,7 @@ char* table[100];
 int contTable=0;
 int aux_inicializacao;
 char *aux_tipo_inicializacao;
+
 
 void pega_varios_read();
 int verifica_palavras_reservadas();
@@ -40,12 +39,11 @@ int verifica_inicializacao_int();
 int verifica_inicializacao_dec();
 void pega_palavra_dec();
 void inicializa_struct();
-
+void verifica_if_then();
 
 
 
 void copia_arquivo(){
-	
 	
 	if((file=fopen("../public/valido.txt","r"))==NULL){
 		printf("nao foi possivel abrir o arquivo\n");
@@ -60,8 +58,6 @@ void copia_arquivo(){
 	}while(!feof(file)&&i<10000);
 	*(string-1)='\0';
 	fclose(file);
-	
-	
 }
 
 char* pula_espaco(){
@@ -106,6 +102,7 @@ char* verifica(){
 			c=0;
 			strcpy(temp,"");
 			pega_Palavra();	
+			
 			//printf("%s",temp);
 		    //printf("%d\n",valida_variavel(temp));
 		if(valida_variavel(temp)==0){
@@ -139,10 +136,10 @@ char* verifica(){
 			
 			
 			if(verifica_write(temp)==1){
-				printf("write\n");
+				printf("escrita\n");
 							pula_espaco();
 							  	if(arquivo[i++]=='('){
-							  		printf("entrou no write\n");
+							  		printf("entrou na escrita \n");
 							  		pula_espaco();
 									if(arquivo[i]=='"'){
 										i++;
@@ -166,16 +163,16 @@ char* verifica(){
 												}
 												pula_espaco();
 												if(!arquivo[i++]==')'){
-													printf("Erro de Balanceamento no comando Write  \n");
+													printf("Erro de Balanceamento no comando escrita  \n");
 													exit(0);
 												}
 												c=0;
 									}else {
-											printf("Erro no camando Write \n");
+											printf("Erro no camando de escrita \n");
 											exit(0);
 									}
 								}else{
-										printf("Erro de Balanceamento no comando Write ' ( ' \n");
+										printf("Erro de Balanceamento no comando escrita ' ( ' \n");
 										exit(0);
 								}	
 								
@@ -184,7 +181,7 @@ char* verifica(){
 		
 			
 			if(verifica_read(temp)==1){
-				printf("read\n");
+				printf("leitura\n");
 				pula_espaco();
 				if(arquivo[i++]=='('){
 					
@@ -194,7 +191,7 @@ char* verifica(){
 									printf("Erro de balanceamento ) \n");
 									exit(0);
 					}
-//						printf("read");
+//						printf("leitura");
 				}else exit(0);
 				i++;
 				verifica();	
@@ -202,7 +199,7 @@ char* verifica(){
 		
 		
 			if(verifica_int(temp)){
-				printf("int\n");
+				printf("inteiro\n");
 				 copia_tipo_variavel_temporaria();
 				 pega_varias_variaveis();
 				 verifica();
@@ -210,7 +207,7 @@ char* verifica(){
 		
 		
 			if(verifica_dec(temp)){
-				printf("dec\n");
+				printf("decimal\n");
 				 copia_tipo_variavel_temporaria();
 				 pega_varias_variaveis();
 				 verifica();
@@ -218,7 +215,7 @@ char* verifica(){
 		
 		
 		    if(verifica_char(temp)){
-		    	printf("char\n");
+		    	printf("caractere\n");
 				 copia_tipo_variavel_temporaria();
 				 pega_varias_variaveis();
 				 verifica();
@@ -581,6 +578,7 @@ void verifica_if_then(){
 	}
 	
 }
+
 
 int verifica_palavras_reservadas(){
 	while(lista_palavras_reservadas!=NULL){
