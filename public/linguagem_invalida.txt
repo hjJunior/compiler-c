@@ -1,0 +1,20 @@
+principal
+    inteiro &idade;
+    inteiro &num;
+    caractere &nome;
+
+    &idade=23;
+    &num=2;
+    &nome="Jean";
+
+    escrita("Qual o teu nome?");
+        leitura(&nome);
+
+    escrita("Qual a tua idade?");
+        leitura(&anos);
+
+    se(&num>1) entao escrita("Maior que 5");
+
+    escrita(&nome);
+    escrita(&num);
+final

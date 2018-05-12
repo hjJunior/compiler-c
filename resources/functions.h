@@ -1,6 +1,6 @@
 struct variaveis{
 	char* tipo;
-	char* nome;
+	char* variavel;
 	char* valor;
 };
 
@@ -46,8 +46,8 @@ void pega_palavra_decimal();
 void inicializa_struct();
 
 void copia_arquivo(){
-	if((file=fopen("../public/valido.txt","r"))==NULL){
-		printf("nao foi possivel abrir o arquivo\n");
+	if((file=fopen("../public/linguagem_valida.txt","r"))==NULL){
+		printf("Impossivel abrir o arquivo informado\n");
 		exit(0);
 	}
 	
@@ -77,7 +77,7 @@ char* pega_palavra(){
 		i++;			
 	}
 	
-	while(!strchr("\n\t (),;*&%$>:^@=<",arquivo[i])){
+	while(!strchr("\n\t (),;*#%$>:^@=<",arquivo[i])){
 		temp[c]=arquivo[i];
 		c++;
 		i++;
@@ -104,7 +104,7 @@ char* verifica(){
 	c=0;
 	strcpy(temp,"");
 	pega_palavra();
-    
+
 	if(valida_variavel(temp)==0){
 		if(verifica_principal(temp)==1 && flag==0){
 			flag=1;
@@ -122,7 +122,9 @@ char* verifica(){
 				printf("ERRO DE SINTAXE\n");
 				exit(0);
 			}
-			printf("linguagem aceita\n");
+			printf("\n========================\n");
+			printf("=  LINGUAGEM VALIDA    =\n");
+			printf("========================\n");
 			final=1;
 			return 0;
 		}
@@ -228,6 +230,7 @@ char* verifica(){
 	
 		if(verifica_se(temp)==1){
 			printf("se\n");
+			printf("comecou se\n");
 			pula_espaco();
 			
 			if(arquivo[i++]!='('){
@@ -267,6 +270,9 @@ char* verifica(){
 					exit(0);
 				}
 			}
+
+			printf("terminou se\n");
+			
 			verifica();
 		}
 		
@@ -288,7 +294,7 @@ char* verifica(){
 			 			if(verifica_inicializacao_inteiro()==1){	
 			 				inicializa_variavel();
 						 }else{
-						 	printf("Erro ao tentar inicializar a variavel '%s' com valor diferente de seu tipo\n",lista_variaveis_declaradas[aux_inicializacao].nome);	
+						 	printf("Erro ao tentar inicializar a variavel '%s' com valor diferente de seu tipo\n",lista_variaveis_declaradas[aux_inicializacao].variavel);	
 						 	exit(0);
 						 }
 					 }
@@ -325,7 +331,7 @@ char* verifica(){
 						if(verifica_inicializacao_decimal()==1){
 			 				inicializa_variavel();
 						 }else{
-						 	printf("Erro ao tentar inicializar a variavel '%s' com valor diferente de seu tipo\n",lista_variaveis_declaradas[aux_inicializacao].nome);			 	
+						 	printf("Erro ao tentar inicializar a variavel '%s' com valor diferente de seu tipo\n",lista_variaveis_declaradas[aux_inicializacao].variavel);			 	
 						 	exit(0);
 						 }
 					}
@@ -369,11 +375,11 @@ void pega_varios_leitura(){
 		}
 		
 		if(valida_variavel(temp)==0){
-			printf("Nome de variavel errada %s\n",temp);
+			printf("Variavel de variavel errada %s\n",temp);
 		}
 		
 		if(verifica_lista_variaveis()==0){
-			printf("variavel '%s' nao delarada \n",temp);
+			printf("Variavel '%s' foi declarada \n",temp);
 			exit(0);
 		}
 		
@@ -392,7 +398,7 @@ void pega_varios_leitura(){
 
 void pega_variavel(){
 	c=0;
-	char* nome=(char*)malloc(10000);
+	char* variavel=(char*)malloc(10000);
 	pula_espaco();
 	
 	if(arquivo[i]=='&'){
@@ -419,9 +425,9 @@ void imprime_variaveis_declaradas(){
 	int i;
 	
 	for(i=0;i<contTable;i++){
-		printf("Tipo: %s\n",lista_variaveis_declaradas[i].tipo);
-		printf("Nome: %s\n",lista_variaveis_declaradas[i].nome);
-		printf("Valor: %s\n",lista_variaveis_declaradas[i].valor);
+		printf("Tipo => %s\n",lista_variaveis_declaradas[i].tipo);
+		printf("Variavel => %s\n",lista_variaveis_declaradas[i].variavel);
+		printf("Valor => %s\n",lista_variaveis_declaradas[i].valor);
 		printf("\n");
 	}
 }
@@ -443,11 +449,11 @@ void insere_variaveis_declaradas(){
 		exit(0);
 	}
 	while(temp[y]!='\0'){
-		lista_variaveis_declaradas[contTable].nome[y]=temp[y];
+		lista_variaveis_declaradas[contTable].variavel[y]=temp[y];
 		y++;
 	}
 	
-	lista_variaveis_declaradas[contTable].nome[y]='\0';
+	lista_variaveis_declaradas[contTable].variavel[y]='\0';
 	strcpy(lista_variaveis_declaradas[contTable].tipo,tipo_temporario);
 	strcpy(lista_variaveis_declaradas[contTable].valor,"null");
 	contTable++;
@@ -457,7 +463,7 @@ int verifica_lista_variaveis(){
 	int x;
 	
 	for(x=0;x<contTable;x++){
-		if(strcmp(temp,lista_variaveis_declaradas[x].nome)==0){
+		if(strcmp(temp,lista_variaveis_declaradas[x].variavel)==0){
 			strcpy(aux_tipo_inicializacao,lista_variaveis_declaradas[x].tipo);
 			aux_inicializacao=x;
 	 		return 1;
@@ -495,7 +501,7 @@ void pega_palavra_decimal(){
 		if(arquivo[i++]==';'){
 			temp[c]='\0';
 		}else{
-			printf("Erro ao inicializar %s\n",lista_variaveis_declaradas[aux_inicializacao].nome);
+			printf("Erro ao inicializar %s\n",lista_variaveis_declaradas[aux_inicializacao].variavel);
 			exit(0);
 		}
 	}	
@@ -520,7 +526,7 @@ void inicializa_struct(){
 	int x;
 	aux_tipo_inicializacao=(char*) malloc(10000);
 	for(x=0;x<10000;x++){
-		lista_variaveis_declaradas[x].nome=(char*)malloc(10000); 
+		lista_variaveis_declaradas[x].variavel=(char*)malloc(10000); 
 		lista_variaveis_declaradas[x].tipo=(char*)malloc(10000);
 		lista_variaveis_declaradas[x].valor=(char*)malloc(10000);
 	}

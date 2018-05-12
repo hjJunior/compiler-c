@@ -1,3 +1,8 @@
+// Compilador 2018-1
+// Disciplina: Compiladores Professora: Aline Dayany Lemos
+// Acadêmico: Breno Borges 	Matricula:	1410969
+// Acadêmico: Jean Flores	Matricula: 	1310159
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
