@@ -1,3 +1,0 @@
-begin
-writ("teste");
-end
